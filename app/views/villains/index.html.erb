@@ -1,0 +1,7 @@
+<h1>WELCOME TO THE LEGION OF DOOM</h1>
+
+<h3>Current Roster</h3>
+<ul><% @villains.each do |villain| %>
+  <li><%= link_to villain.name, villain %></li>
+<% end %>
+</ul>

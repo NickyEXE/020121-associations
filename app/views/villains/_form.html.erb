@@ -1,0 +1,18 @@
+<%= form_for @villain do |f| %>
+  <% if @villain.errors.any? %>
+    <p><%= "#{pluralize(@villain.errors.count, "error")} prevented this item from being saved:" %></p>
+    <ul><% @villain.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+    </ul>
+  <% end %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br/>
+  <%= f.label :power %>
+  <%= f.text_field :power %><br/>
+  <%= f.label :adversary %>
+  <%= f.text_field :adversary %><br/>
+  <%= f.label :power_level %>
+  <%= f.number_field :power_level, in: 1..10 %><br/>
+  <%= f.submit %>
+<% end %>
