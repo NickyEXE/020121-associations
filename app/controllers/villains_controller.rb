@@ -55,7 +55,7 @@ class VillainsController < ApplicationController
   end
 
   def villain_params
-    params.require(:villain).permit(:name, :power, :adversary, :power_level)
+    params.require(:villain).permit(:name, :power, :adversary_name, :power_level, :squad_id)
   end
 
 end

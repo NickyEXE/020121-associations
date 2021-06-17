@@ -10,15 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_221332) do
+ActiveRecord::Schema.define(version: 2021_06_17_231046) do
 
-  create_table "villains", force: :cascade do |t|
+  create_table "heros", force: :cascade do |t|
     t.string "name"
-    t.string "power"
-    t.string "adversary"
-    t.integer "power_level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "squads", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "villains", force: :cascade do |t|
+    t.string "name"
+    t.string "power"
+    t.integer "power_level"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "squad_id"
+    t.integer "hero_id"
+    t.index ["hero_id"], name: "index_villains_on_hero_id"
+    t.index ["squad_id"], name: "index_villains_on_squad_id"
+  end
+
+  add_foreign_key "villains", "heros"
+  add_foreign_key "villains", "squads"
 end

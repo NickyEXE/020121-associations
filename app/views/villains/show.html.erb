@@ -1,7 +1,8 @@
 <h1><%= @villain.name %></h1>
 <p>Power: <%= @villain.power %></p>
-<p>Adversary: <%= @villain.adversary %></p>
+<p>Adversary: <%= @villain.adversary_name %></p>
 <p>Power Level: <%= "💪 " * @villain.power_level %></p>
+<p>Squad: <%= squad(@villain) %></p>
 
 <%= button_to "Edit #{@villain.name}", edit_villain_path(@villain), method: :get %>
 <%= button_to "Delete #{@villain.name}", @villain, method: :delete %>

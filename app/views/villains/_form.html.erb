@@ -10,9 +10,23 @@
   <%= f.text_field :name %><br/>
   <%= f.label :power %>
   <%= f.text_field :power %><br/>
-  <%= f.label :adversary %>
-  <%= f.text_field :adversary %><br/>
+  <%= f.label :adversary_name %>
+  <%= f.text_field :adversary_name %><br/>
+
+  <%#comment this in if you want a datalist%>
+  <% if false %>
+  <input list="adversaries" value=<%= @villain.adversary_name %> id="villain[adversary_name]" name="villain[adversary_name]" />
+  <datalist id="adversaries">
+      <% Hero.all.each do |hero| %>
+        <option value=<%= hero.name %>>
+      <% end %>
+  </datalist>
+  <% end %>
+
+
   <%= f.label :power_level %>
   <%= f.number_field :power_level, in: 1..10 %><br/>
+  <%= f.label :squad %>
+  <%= f.collection_select :squad_id, Squad.all, :id, :name, prompt: true %>
   <%= f.submit %>
 <% end %>

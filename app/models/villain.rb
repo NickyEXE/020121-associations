@@ -1,4 +1,6 @@
 class Villain < ApplicationRecord
+  belongs_to :squad, optional: true
+  belongs_to :adversary, class_name: "Hero", foreign_key: "hero_id", optional: true
 
   # validates uses rails' built in validators, or validators you've added to rails
   validates :name, :power, :adversary, :power_level, presence: true
@@ -8,6 +10,13 @@ class Villain < ApplicationRecord
   validate :ban_deadpool
   validates_with SkrullValidator
 
+  def adversary_name
+    adversary ? adversary.name : ""
+  end
+
+  def adversary_name=(a_name)
+    self.adversary = Hero.find_or_create_by(name: a_name)
+  end
 
   private
 
