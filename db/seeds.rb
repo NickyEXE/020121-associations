@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+squads = ["Legion of Doom", "Hellfire Club", "Brotherhood of Mutants", "Evil League Of Evil", "AIM"]
+squads.each{|item| Squad.create(name: item)}
+
+puts "Built some squads!"

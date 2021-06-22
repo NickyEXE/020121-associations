@@ -1,0 +1,16 @@
+<h1><%= @hero.name %></h1>
+<h3>Power: <%= @hero.power %></h3>
+<p>Adversaries: </p>
+<% if @hero.villains.any? %>
+  <ul>
+    <% @hero.villains.each do |villain| %>
+    <li><%= link_to villain.name, villain %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <ul><li><%= @hero.name %> has no adversaries yet!</li></ul>
+<% end %>
+<%= button_to "Edit #{@hero.name}", edit_hero_path(@hero), method: :get %>
+<%= button_to "Kill #{@hero.name}", @hero, method: :delete, data: {
+  confirm: "Are you sure he's dead? Have you seen the body? Was it a time bullet? Was this a skrull? Was this an alternate universe version? Are you really sure?"
+  } %>

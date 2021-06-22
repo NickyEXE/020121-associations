@@ -3,12 +3,15 @@ class Villain < ApplicationRecord
   belongs_to :adversary, class_name: "Hero", foreign_key: "hero_id", optional: true
 
   # validates uses rails' built in validators, or validators you've added to rails
-  validates :name, :power, :adversary, :power_level, presence: true
+  validates :name, :power, :power_level, presence: true
   validates :power_level, numericality: { greater_than: 0, less_than_or_equal_to: 10 }
   # validate is used for building out custom validations
   # validates_with is used for building out validations that you want to share between models
   validate :ban_deadpool
   validates_with SkrullValidator
+  before_validation :set_power
+  # before_create :set_power -- happens after validation and not on update actions
+  # before_save :set_power -- happens after validation
 
   def adversary_name
     adversary ? adversary.name : ""
@@ -19,6 +22,12 @@ class Villain < ApplicationRecord
   end
 
   private
+
+  def set_power
+    if self.power.blank?
+      self.power = Faker::Superhero.power
+    end
+  end
 
   def ban_deadpool
     if self.name.downcase.include?("deadpool")
