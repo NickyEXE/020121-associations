@@ -15,6 +15,7 @@ class Villain < ApplicationRecord
 
   scope :stronger_than, ->(strength){ where("power_level > ?", strength) }
 
+  #
   # same thing as:
   # def self.stronger_than(strength)
   #   where("power_level > ?", strength)
