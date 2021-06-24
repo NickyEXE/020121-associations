@@ -18,6 +18,7 @@ class HerosController < ApplicationController
     if @hero.save
       redirect_to heros_path
     else
+      3.times{ @hero.villains.build }
       render :new
     end
   end

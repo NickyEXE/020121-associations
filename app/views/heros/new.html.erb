@@ -1,13 +1,7 @@
 <h1>Log a new Hero</h1>
 
 <%= form_for @hero do |f| %>
-  <% if @hero.errors.any? %>
-    <p><%= "#{pluralize(@hero.errors.count, "error")} prevented this item from being saved:" %></p>
-    <ul><% @hero.errors.each do |error| %>
-      <li><%= error.full_message %></li>
-    <% end %>
-    </ul>
-  <% end %>
+   <%= render partial: "layouts/errors", locals: {record: @hero} %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :power %>

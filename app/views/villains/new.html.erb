@@ -1,3 +1,7 @@
 <h3>Have a bad day?</h3>
-<h1>Don the Mask, Get Revenge</h1>
-<%= render "form" %>
+<% if @squad %>
+  <h1>Thank you for considering the <%= @squad.name %></h1>
+<% else %>
+  <h1>Don the Mask, Get Revenge</h1>
+<% end %>
+<%= render partial: "form", locals: {villain: @villain, squad: @squad} %>

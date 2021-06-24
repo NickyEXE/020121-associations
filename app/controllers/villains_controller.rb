@@ -1,9 +1,14 @@
 class VillainsController < ApplicationController
   before_action :set_villain, only: [:show, :edit, :update, :destroy]
+  before_action :set_squad
 
   # get "/villains"
   def index
-    @villains = Villain.all
+    if @squad
+      @villains = @squad.villains
+    else
+      @villains = Villain.all
+    end
     render :index
   end
 
@@ -52,6 +57,10 @@ class VillainsController < ApplicationController
 
   def set_villain
     @villain = Villain.find(params[:id])
+  end
+
+  def set_squad
+    @squad = Squad.find_by_id(params[:squad_id])
   end
 
   def villain_params

@@ -13,6 +13,13 @@ class Villain < ApplicationRecord
   # before_create :set_power -- happens after validation and not on update actions
   # before_save :set_power -- happens after validation
 
+  scope :stronger_than, ->(strength){ where("power_level > ?", strength) }
+
+  # same thing as:
+  # def self.stronger_than(strength)
+  #   where("power_level > ?", strength)
+  # end
+
   def adversary_name
     adversary ? adversary.name : ""
   end

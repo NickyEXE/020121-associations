@@ -1,0 +1,7 @@
+ <% if record.errors.any? %>
+    <p><%= "#{pluralize(record.errors.count, "error")} prevented this item from being saved:" %></p>
+    <ul><% record.errors.each do |error| %>
+      <li><%= error.full_message %></li>
+    <% end %>
+    </ul>
+  <% end %>

@@ -1,7 +1,15 @@
-<h1>WELCOME TO THE LEGION OF DOOM</h1>
+<% if @squad %>
+  <h1><%= render partial: "squads/squad", locals: {squad: @squad}%></h1>
+<% else %>
+  <h1>WELCOME TO THE VILLAINS REGISTRY</h1>
+<% end %>
 
 <h3>Current Roster</h3>
 <ul><% @villains.each do |villain| %>
   <li><%= link_to villain.name, villain %></li>
 <% end %>
 </ul>
+
+<% if @squad %>
+  <%= link_to "Add a new member of #{@squad.name}", new_squad_villain_path(@squad) %>
+<% end %>

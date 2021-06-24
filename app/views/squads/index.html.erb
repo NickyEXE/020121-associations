@@ -1,0 +1,13 @@
+<h1>See Our Teams!</h1>
+
+<div class="cards">
+  <%= render @squads %>
+</div>
+
+
+<%# The long way to do it %>
+<% if false %>
+  <% @squads.each do |squad|%>
+    <%= render partial: "squad", locals: {squad: squad} %>
+  <% end %>
+<% end %>

@@ -1,11 +1,5 @@
-<%= form_for @villain do |f| %>
-  <% if @villain.errors.any? %>
-    <p><%= "#{pluralize(@villain.errors.count, "error")} prevented this item from being saved:" %></p>
-    <ul><% @villain.errors.each do |error| %>
-      <li><%= error.full_message %></li>
-    <% end %>
-    </ul>
-  <% end %>
+<%= form_for villain do |f| %>
+  <%= render partial: "layouts/errors", locals: {record: villain} %>
   <%= f.label :name %>
   <%= f.text_field :name %><br/>
   <%= f.label :power %>
@@ -15,18 +9,20 @@
 
   <%#comment this in if you want a datalist%>
   <% if false %>
-  <input list="adversaries" value=<%= @villain.adversary_name %> id="villain[adversary_name]" name="villain[adversary_name]" />
+  <input list="adversaries" value=<%= villain.adversary_name %> id="villain[adversary_name]" name="villain[adversary_name]" />
   <datalist id="adversaries">
       <% Hero.all.each do |hero| %>
         <option value=<%= hero.name %>>
       <% end %>
   </datalist>
   <% end %>
-
-
   <%= f.label :power_level %>
   <%= f.number_field :power_level, in: 1..10 %><br/>
-  <%= f.label :squad %>
-  <%= f.collection_select :squad_id, Squad.all, :id, :name, prompt: true %>
+  <% if squad %>
+    <%= f.hidden_field :squad_id, value: squad.id %>
+  <% else %>
+    <%= f.label :squad %>
+    <%= f.collection_select :squad_id, Squad.all, :id, :name, prompt: true %>
+  <% end %>
   <%= f.submit %>
 <% end %>
